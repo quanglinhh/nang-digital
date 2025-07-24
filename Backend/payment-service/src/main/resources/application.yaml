@@ -1,0 +1,18 @@
+server:
+  port: 8083
+  servlet:
+    context-path: /payments
+
+spring:
+  datasource:
+    url: "jdbc:mysql://localhost:3308/nang_identity"
+    driverClassName: "com.mysql.cj.jdbc.Driver"
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+jwt:
+  signerKey: "1TjXchw5FloESb63Kc+DFhTARvpWL4jUGCwfGWxuG5SIf/1y/LgJxHnMqaF6A/ij"
