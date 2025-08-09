@@ -9,9 +9,11 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.UUID;
 
 @Slf4j
 @Component
@@ -53,38 +55,55 @@ public class TpsSchedule {
 
 
     private void processReport(ReportType type, String redisKeyPrefix, DateTimeFormatter formatter, ChronoUnit unit) {
-        LocalDateTime now = LocalDateTime.now().withSecond(0).withNano(0);
-        log.info("start save tps to DB type: {}", type);
-        // Lấy bản ghi gần nhất theo loại report
-        TpsReport lastReport = tpsRepository.findTopByReportTypeOrderByReportTimeDesc(type);
-        LocalDateTime lastTime = (lastReport != null)
-                ? lastReport.getReportTime()
-                : getDefaultStartTime(now, unit);
+        String lockKey = "LOCK_TPS_" + type;
+        String lockValue = UUID.randomUUID().toString();
+        boolean acquired = Boolean.TRUE.equals(
+                redisTemplate.opsForValue().setIfAbsent(lockKey, lockValue, Duration.ofMinutes(1)) // lock timeout
+        );
 
-        // Loop từ thời gian kế tiếp đến thời gian hiện tại - 1
-        LocalDateTime start = lastTime.plus(1, unit);
-        LocalDateTime end = now.minus(1, unit);
+        if (!acquired) {
+            log.info("Skip {} job because another instance is processing", type);
+            return; // có lock => job khác đang chạy
+        }
 
-        for (LocalDateTime time = start; !time.isAfter(end); time = time.plus(1, unit)) {
-            String redisKey = String.format("%s_%s", redisKeyPrefix, time.format(formatter));
-            log.info("save tps to DB: {}", redisKey);
-            String value = redisTemplate.opsForValue().get(redisKey);
+        try {
+            LocalDateTime now = LocalDateTime.now().withSecond(0).withNano(0);
+            log.info("start save tps to DB type: {}", type);
 
-            long amount = (value != null) ? Long.parseLong(value) : 0;
+            TpsReport lastReport = tpsRepository.findTopByReportTypeOrderByReportTimeDesc(type);
+            LocalDateTime lastTime = (lastReport != null)
+                    ? lastReport.getReportTime()
+                    : getDefaultStartTime(now, unit);
 
-            // Lưu vào DB
-            TpsReport report = new TpsReport();
-            report.setReportTime(time);
-            report.setReportType(type);
-            report.setAmount(amount);
-            tpsRepository.save(report);
+            LocalDateTime start = lastTime.plus(1, unit);
+            LocalDateTime end = now.minus(1, unit);
 
-            // Xóa key Redis
-            redisTemplate.delete(redisKey);
+            for (LocalDateTime time = start; !time.isAfter(end); time = time.plus(1, unit)) {
+                String redisKey = String.format("%s_%s", redisKeyPrefix, time.format(formatter));
+                String value = redisTemplate.opsForValue().get(redisKey);
 
-            log.info("Saved {} report: {} -> {} and deleted key", type, redisKey, amount);
+                long amount = (value != null) ? Long.parseLong(value) : 0;
+
+                TpsReport report = new TpsReport();
+                report.setReportTime(time);
+                report.setReportType(type);
+                report.setAmount(amount);
+                tpsRepository.save(report);
+
+                redisTemplate.delete(redisKey);
+
+                log.info("Saved {} report: {} -> {} and deleted key", type, redisKey, amount);
+            }
+        } finally {
+            // Chỉ xóa lock nếu chính mình đặt
+            String currentValue = redisTemplate.opsForValue().get(lockKey);
+            if (lockValue.equals(currentValue)) {
+                redisTemplate.delete(lockKey);
+            }
         }
     }
+
+
 
     private LocalDateTime getDefaultStartTime(LocalDateTime now, ChronoUnit unit) {
         switch (unit) {
