@@ -34,3 +34,12 @@ spring:
             - Path=${app.api-prefix}/payments/**
           filters:
             - StripPrefix=2
+#kafka config
+  kafka:
+    bootstrap-servers: localhost:9094
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+tps:
+  topic-name: tps-report-topic

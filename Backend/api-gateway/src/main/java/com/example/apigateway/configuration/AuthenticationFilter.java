@@ -2,6 +2,7 @@ package com.example.apigateway.configuration;
 
 import com.example.apigateway.dto.ApiResponse;
 import com.example.apigateway.service.IdentityService;
+import com.example.apigateway.service.TpsReporter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AccessLevel;
@@ -36,6 +37,8 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
     IdentityService identityService;
     ObjectMapper objectMapper;
 
+    private TpsReporter tpsReporter;
+
     @NonFinal
     private String[] publicEndpoints = {
             "/identity/auth/.*",
@@ -51,18 +54,24 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         log.info("Enter authentication filter ......");
-        if (isPublicEndpoint(exchange.getRequest()))
+
+        if (isPublicEndpoint(exchange.getRequest())){
+            tpsReporter.increment();
             return chain.filter(exchange);
+        }
+
         //Get token
         List<String> authHeaders = exchange.getRequest().getHeaders().get("Authorization");
         if (CollectionUtils.isEmpty(authHeaders)) {
            return unauthenticated(exchange.getResponse());
         }
-        String token = authHeaders.getFirst().replace("Bearer ", "");
+        String token = authHeaders.getFirst().replace("Bearer ",  "");
         log.info("token: " + token);
         return identityService.introspect(token).flatMap(introspectResponse ->{
-            if (introspectResponse.getResult().isValid())
+            if (introspectResponse.getResult().isValid()){
+                tpsReporter.increment();
                 return  chain.filter(exchange);
+            }
             else
                 return unauthenticated(exchange.getResponse());
         }).onErrorResume( throwable -> unauthenticated(exchange.getResponse()));

@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3fceec2-3c70-4fe7-b5fa-47c549dad566" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="b3fceec2-3c70-4fe7-b5fa-47c549dad566" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,7 +20,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
@@ -58,16 +56,17 @@
     "Spring Boot.IdentityServiceApplication.executor": "Run",
     "Spring Boot.OrderServiceApplication.executor": "Run",
     "Spring Boot.PaymentServiceApplication.executor": "Run",
+    "Spring Boot.ReportServiceApplication.executor": "Run",
     "ignore.virus.scanning.warn.message": "true",
-    "jdk.selected.JAVA_MODULE": "ms-21",
+    "jdk.selected.JAVA_MODULE": "17",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "E:/Dev/Project/nang-digital/payment-service/src/main/resources",
+    "last_opened_file_path": "E:/Dev/Project/nang-digital",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0",
     "run.configurations.included.in.services": "true",
@@ -77,26 +76,29 @@
   "keyToStringList": {
     "DatabaseDriversLRU": [
       "redshift"
+    ],
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "HTML"
     ]
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Dev\Project\nang-digital\Backend\report-service\src\main\resources" />
       <recent name="E:\Dev\Project\nang-digital\payment-service\src\main\resources" />
       <recent name="E:\Dev\Project\nang-digital\payment-service\src\main\java\com\nang\paymentservice" />
       <recent name="E:\Dev\Project\nang-digital\order-service\src\main\java\com\nang\orderservice" />
       <recent name="E:\Dev\Project\nang-digital\order-service\src\main\resources" />
-      <recent name="E:\Dev\Project\nang-digital\device-service\src\main\java\com\example\deviceservice" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\Dev\Project\nang-digital\device-service\src\main\resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.nang.reportservice.dto" />
       <recent name="com.nang.orderservice.dto.request" />
       <recent name="com.nang.orderservice.dto.response" />
       <recent name="com.example.deviceservice.configuration" />
       <recent name="com.example.deviceservice.service" />
-      <recent name="com.example.deviceservice.dto.response" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -177,7 +179,7 @@
     </configuration>
     <configuration name="DeviceServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
-      <module name="device-service" />
+      <module name="profile-service" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.deviceservice.DeviceServiceApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -204,6 +206,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ReportServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="report-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.nang.reportservice.ReportServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="JUnit.All in api-gateway" />
+      <item itemvalue="JUnit.All in identity-service" />
+      <item itemvalue="JUnit.DeviceServiceApplicationTests" />
+      <item itemvalue="JUnit.OrderServiceApplicationTests" />
+      <item itemvalue="Spring Boot.ApiGatewayApplication (1)" />
+      <item itemvalue="Spring Boot.DeviceServiceApplication" />
+      <item itemvalue="Spring Boot.IdentityServiceApplication" />
+      <item itemvalue="Spring Boot.OrderServiceApplication" />
+      <item itemvalue="Spring Boot.PaymentServiceApplication" />
+      <item itemvalue="Spring Boot.ReportServiceApplication" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.OrderServiceApplicationTests" />
@@ -243,6 +264,17 @@
       <workItem from="1753233066861" duration="16499000" />
       <workItem from="1753270144972" duration="5714000" />
       <workItem from="1753321402185" duration="14173000" />
+      <workItem from="1753352515161" duration="1756000" />
+      <workItem from="1753418535575" duration="1076000" />
+      <workItem from="1753666210975" duration="3572000" />
+      <workItem from="1754013535118" duration="783000" />
+      <workItem from="1754204417442" duration="8000" />
+      <workItem from="1754364666834" duration="1386000" />
+      <workItem from="1754450204572" duration="3009000" />
+      <workItem from="1754536278435" duration="605000" />
+      <workItem from="1754549581163" duration="9862000" />
+      <workItem from="1754616511708" duration="8459000" />
+      <workItem from="1754632167448" duration="8731000" />
     </task>
     <servers />
   </component>
