@@ -13,8 +13,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -60,7 +60,7 @@
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "17",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "E:/Dev/Project/nang-digital",
+    "last_opened_file_path": "E:/Dev/Project/nang-digital/Backend/report-service/src/main/java/com/nang/reportservice/configuration/security",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -84,21 +84,21 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Dev\Project\nang-digital\Backend\report-service\src\main\java\com\nang\reportservice\configuration\security" />
+      <recent name="E:\Dev\Project\nang-digital\Backend\report-service\src\main\java\com\nang\reportservice" />
       <recent name="E:\Dev\Project\nang-digital\Backend\report-service\src\main\resources" />
       <recent name="E:\Dev\Project\nang-digital\payment-service\src\main\resources" />
       <recent name="E:\Dev\Project\nang-digital\payment-service\src\main\java\com\nang\paymentservice" />
-      <recent name="E:\Dev\Project\nang-digital\order-service\src\main\java\com\nang\orderservice" />
-      <recent name="E:\Dev\Project\nang-digital\order-service\src\main\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\Dev\Project\nang-digital\device-service\src\main\resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.nang.reportservice.dto.response" />
       <recent name="com.nang.reportservice.dto" />
       <recent name="com.nang.orderservice.dto.request" />
       <recent name="com.nang.orderservice.dto.response" />
       <recent name="com.example.deviceservice.configuration" />
-      <recent name="com.example.deviceservice.service" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -275,6 +275,7 @@
       <workItem from="1754549581163" duration="9862000" />
       <workItem from="1754616511708" duration="8459000" />
       <workItem from="1754632167448" duration="8731000" />
+      <workItem from="1754704722363" duration="12675000" />
     </task>
     <servers />
   </component>

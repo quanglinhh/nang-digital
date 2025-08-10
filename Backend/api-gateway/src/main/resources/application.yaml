@@ -34,6 +34,12 @@ spring:
             - Path=${app.api-prefix}/payments/**
           filters:
             - StripPrefix=2
+        - id: report_service
+          uri: http://localhost:8084
+          predicates:
+            - Path=${app.api-prefix}/report/**
+          filters:
+            - StripPrefix=2
 #kafka config
   kafka:
     bootstrap-servers: localhost:9094
